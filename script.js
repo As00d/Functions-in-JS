@@ -114,3 +114,34 @@ greetArrow('Hello')('bni');
 
 
 // The call and apply methods 
+// In this lecture we want to set this keyword manually and want to understand why we want to do that . Lets take an example
+
+const vistara = {
+  airline: 'Vistara',
+  flightCode: 'UK',
+  booking : [],
+  book(flightNum, name) {
+    console.log(`${name} booked a seat in ${this.airline} airline with code ${this.flightCode}${flightNum}`);
+     this.booking.push({flight: `${this.flightCode}`, name : `${name}`})
+  }
+}
+
+vistara.book('87','Anki');
+vistara.book('97','Bni');
+console.log(vistara.booking);
+
+const euroWings = {
+  airline: 'Vistara',
+  flightCode: 'UK',
+  booking: [],
+};
+// Does not work
+const book = vistara.book;
+// book('23','sara William')
+book.call(euroWings, '23', 'sara William');
+book.call(vistara, '23', 'sara William');
+
+console.log(euroWings);
+console.log(vistara.booking);
+
+// apply method 
