@@ -265,3 +265,23 @@ document
 // Bonus question resolution :
 
  poll.displayResults.call({answers:[5,2,3]},'array');
+
+//  Topic name : IIFE- immediately invoked function expression 
+/* In coding there might be a case where we don't want to call a function twice or may be call it once. But if we write a function there is no restriction on how much i can call. So there is way in js i.e using IIFE */
+
+const callOnce = function() {
+  console.log('Can call me more than once no limits ');
+}
+callOnce();
+callOnce();
+callOnce();
+
+// function declaration wrap it in () and then call it using ()
+(function() {
+  console.log('you can call me only once');
+})();
+
+// arrow function expression
+(() => console.log('I am arrow, u can call me once only'))();
+
+// One way for creating these IIFE was to have a function that can be immediately called but also was for scoping. But since now we do use let and const which are scoped already so this is not the main purpose it serves now
