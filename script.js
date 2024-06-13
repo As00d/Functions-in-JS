@@ -238,17 +238,20 @@ const poll = {
   answers: new Array(4).fill(0),
   registerNewAnswer: function () {
     // user input
-    let value = Number(prompt(
-      `${this.question} \n${this.options.join('\n')} \n (Write option number)`
-    ));
+    let value = Number(
+      prompt(
+        `${this.question} \n${this.options.join('\n')} \n (Write option number)`
+      )
+    );
     // register answer - eg of short circuit also
-    typeof value === 'number' && value < this.answers.length && this.answers[value]++;
-    
+    typeof value === 'number' &&
+      value < this.answers.length &&
+      this.answers[value]++;
+
     this.displayResults('string');
     this.displayResults('');
   },
   displayResults(type = 'array') {
-   
     if (type === 'string') {
       console.log(`Poll results are ${this.answers.join(', ')}`);
     } else if (type === 'array') {
@@ -264,20 +267,20 @@ document
 
 // Bonus question resolution :
 
- poll.displayResults.call({answers:[5,2,3]},'array');
+poll.displayResults.call({ answers: [5, 2, 3] }, 'array');
 
-//  Topic name : IIFE- immediately invoked function expression 
+//  Topic name : IIFE- immediately invoked function expression
 /* In coding there might be a case where we don't want to call a function twice or may be call it once. But if we write a function there is no restriction on how much i can call. So there is way in js i.e using IIFE */
 
-const callOnce = function() {
+const callOnce = function () {
   console.log('Can call me more than once no limits ');
-}
+};
 callOnce();
 callOnce();
 callOnce();
 
 // function declaration wrap it in () and then call it using ()
-(function() {
+(function () {
   console.log('you can call me only once');
 })();
 
@@ -285,3 +288,38 @@ callOnce();
 (() => console.log('I am arrow, u can call me once only'))();
 
 // One way for creating these IIFE was to have a function that can be immediately called but also was for scoping. But since now we do use let and const which are scoped already so this is not the main purpose it serves now
+
+// Closures in JS vvi
+// closure is not something like we create an array, objects it something that happens
+
+// lets take a very simple example of lexical scoping
+function x() {
+  let a = 1;
+  function y() {
+    console.log(a);
+  }
+  return y;
+}
+const z = x();
+z();
+// functions are heart of js programming we can do anything we can pass function as a parameter to the function, return function also
+// Closure is basically a function bind with its lexical environment
+
+// Closure :Function bundled with its lexical environment is known as a closure. Whenever function is returned, even if its vanished in execution context but still it remembers the reference it was pointing to. Its not just that function alone it returns but the entire closure.
+
+const securedBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    console.log(`Passenger count ${passengerCount}`);
+    passengerCount++;
+  };
+};
+
+const booker = securedBooking();
+booker();
+booker();
+booker();
+booker();
+// This property will help us to see the closure
+console.dir(booker);
+// A function always have access to variable env of the execution context where it was created even after the execution context is gone
