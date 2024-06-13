@@ -323,3 +323,46 @@ booker();
 // This property will help us to see the closure
 console.dir(booker);
 // A function always have access to variable env of the execution context where it was created even after the execution context is gone
+
+// Some examples on closures to understand the concept better
+
+// Example 1 : closure
+let f;
+const g = function () {
+  const a = 2;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 3;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+g();
+f(); // 4
+// reassigning a function
+h();
+f(); // 6
+
+// Closure example 2
+
+// to create a timeout, we have a setTimeout function which takes in two parameters
+
+// setTimeout(function () {
+//   console.log('hello, i am a timer');
+// }, 4000);
+
+const boardingTime = function (n, wait) {
+  const perGroup = n / 3;
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers now!!`);
+    console.log(`There are 3 groups each with ${perGroup} passengers`);
+  }, wait*1000);
+  console.log(`Boarding will start in ${wait} seconds`);
+};
+
+boardingTime(300,3);
+// closure also have priority over the scope chain
